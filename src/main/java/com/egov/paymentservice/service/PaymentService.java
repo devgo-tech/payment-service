@@ -81,7 +81,7 @@ public class PaymentService {
 
             } else {
                 Map<String, Object> failedEventMap = Map.of(
-                        "bookingId", bookingNumber,
+                        "bookingNumber", bookingNumber,
                         "reason", "Payment processing failed"
                 );
                 kafkaTemplate.send("booking.failed", failedEventMap);
@@ -106,7 +106,7 @@ public class PaymentService {
         logger.error("Payment service fallback triggered for booking {}: {}", bookingNumber, t.getMessage(), t);
 
         Map<String, Object> failedEventMap = Map.of(
-                "bookingId", bookingNumber,
+                "bookingNumber", bookingNumber,
                 "reason", "Payment service unavailable: " + t.getMessage()
         );
 
